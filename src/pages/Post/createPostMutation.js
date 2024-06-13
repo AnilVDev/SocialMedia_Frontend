@@ -134,10 +134,10 @@ export default function CreatePostMutation() {
           
         },
       });
-      postRefetch()
       if(response.data.createPost.success){
         toast.success("your post uploaded")
-      }
+        }
+      postRefetch()
       
       setOpen(false);
       setDate(null);

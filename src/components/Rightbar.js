@@ -90,7 +90,7 @@ function Rightbar() {
               </ListItemAvatar>
               <ListItemText
                 primary={
-                  <Button onClick={() => navigate(`/${user.username}`)}  >
+                  <Button onClick={() => navigate(`/${user?.username}`)}  >
                     {`${user.firstName} ${user.lastName}`}
                   </Button>
                 }
@@ -102,7 +102,7 @@ function Rightbar() {
                       variant="caption"
                       color="text.primary"
                     >
-                      {user.username}
+                      {user?.username}
                     </Typography>
                   </React.Fragment>
                 }

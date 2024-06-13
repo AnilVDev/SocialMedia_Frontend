@@ -271,8 +271,8 @@ export default function NavbarWithRecentChat() {
        <Drawer variant="permanent" open={open} >
          <DrawerHeader >
          <Avatar
-                    alt={userInfo.username} 
-                    src={userInfo.profile_picture}
+                    alt={userInfo?.username} 
+                    src={userInfo?.profile_picture}
                     onClick = {() => navigate('/profile')}
                     sx={{ cursor: 'pointer' }} 
                   />
