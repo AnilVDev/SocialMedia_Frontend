@@ -213,7 +213,7 @@ export default function Navbar() {
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
         <Avatar
           alt=""
-          src={userInfo.profile_picture}
+          src={userInfo?.profile_picture}
           onClick={() => navigate('/profile')}
           sx={{ cursor: 'pointer' }}
         />
