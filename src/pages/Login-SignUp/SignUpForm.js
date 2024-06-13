@@ -81,7 +81,7 @@ function SignUpForm() {
   return (
 
     <div className="App">
-      <h2>Connect You</h2>
+      <h2>Konnectify</h2>
       <div className='container right-panel-active' id="container">
 
       <div className="form-container sign-up-container">

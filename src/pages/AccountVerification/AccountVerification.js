@@ -43,7 +43,7 @@ function AccountVerification() {
         return (
             
             <div className="App">
-            <h2>Connect You</h2>
+            <h2>Konnectify</h2>
             <div className='container' id="container">
       
               <div className="form-container sign-in-container" >
