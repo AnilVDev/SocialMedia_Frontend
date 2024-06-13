@@ -20,7 +20,6 @@ function MyAccount() {
     const [updatedUserInfo, setUpdatedUserInfo] = useState({ ...userInfo || {} });
     const [imageUrl, setImageUrl] = useState(userInfo?.profile_picture || "");
     const navigate = useNavigate()
-    console.log(userInfo?.profile_picture)
        
     const axiosInstance = useAxios(user?.access);
 
@@ -84,11 +83,9 @@ function MyAccount() {
         }
 
         // dispatch(updateUserInfo(axiosInstance,formData));
-        console.log("da--ta  ",formData)
         try {
           dispatch(updateUserInfo({axiosInstance, formData}));
         } catch (error) {
-          console.error("Error updating user info:", error);
           toast.error("An error occurred while updating your profile.");
         }
     };

@@ -29,7 +29,6 @@ function SignUpForm() {
   useEffect(() => {
     if(isError){
         toast.error(message)
-        console.log('signup-',message)
     }
     if (isSuccess) {
       

@@ -245,7 +245,6 @@ export default function NavbarWithRecentChat() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMouseEnter = (event) => {
-    console.log("mouse enter")
     setAnchorEl(event.currentTarget);
   };
 

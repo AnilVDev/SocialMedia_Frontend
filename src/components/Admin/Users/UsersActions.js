@@ -31,7 +31,6 @@ function UsersActions({ params, rowId, setRowId }) {
     setLoading(true);
 
     const { id, is_active, status } = params.row;
-    console.log( {id, is_active, status} )
 
     const requestData = {
       id:id,
@@ -64,7 +63,6 @@ function UsersActions({ params, rowId, setRowId }) {
   //       setConfirmationOpen(false); 
   //     }, 1000);
   //   } catch (error) {
-  //     console.error('Error:', error);
   //     setLoading(false);
   //   }
   // };

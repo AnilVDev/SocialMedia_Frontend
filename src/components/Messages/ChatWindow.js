@@ -70,7 +70,7 @@ const ChatWindow = () => {
     setWs(ws);
 
     ws.onopen = () => {
-      console.log('WebSocket connected');
+      // console.log('WebSocket connected');
     };
 
     ws.onmessage = (event) => {
@@ -83,7 +83,7 @@ const ChatWindow = () => {
     };
 
     ws.onclose = () => {
-      console.log('WebSocket disconnected');
+      // console.log('WebSocket disconnected');
     };
 
     ws.onerror = (error) => {
@@ -107,7 +107,7 @@ const ChatWindow = () => {
         ws.send(JSON.stringify(payload));
         setMessages("")
         dispatch(setMessageSent())
-        console.log("refetch in chatwindow")
+        // console.log("refetch in chatwindow")
       }
   }
   };

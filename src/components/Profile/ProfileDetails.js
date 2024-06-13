@@ -96,7 +96,6 @@ function ProfileDetails() {
     handleImageClick(posts[selectedPostIndex === posts.length - 1 ? 0 : selectedPostIndex + 1]);
   };
   const handlePopperOpen = (event) => {
-    console.log("popper clicked", anchor)
     setAnchor(anchor ? null : event.currentTarget);
   };
 
@@ -139,7 +138,6 @@ function ProfileDetails() {
   }
 
   const handleEditPost = () => {
-    console.log("edit modal clicked")
     handleCloseModal()
     setEditedDate(selectedPost.dataOfMemory)
     setEditedDescription(selectedPost.description)
@@ -155,7 +153,6 @@ function ProfileDetails() {
 
   const handleSaveChanges = async () => {
     try {
-      console.log("updating...",editedDate,editedDescription,editedPrivacy)
       const response = await updatePostMutation({
         variables: {
           id: selectedPost.id,
@@ -174,7 +171,7 @@ function ProfileDetails() {
         toast.error('Failed to update post');
       }
     } catch (error) {
-      console.error('An error occurred while updating the post:', error.message);
+         toast.error(error.message);
     }
   };
 

@@ -60,26 +60,14 @@ export const getUserList = createAsyncThunk('admin/getUserList', async(_, thunkA
     return await adminService.getUserList(accessToken);
   }catch (error){
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-    console.log(message)
     return thunkAPI.rejectWithValue(message);    
   }
 })
 
 // updateStatus
-// export const updateStatus = createAsyncThunk('auth/updateStatus', async(requestData, thunkAPI) => {
-//   try{
-//     const accessToken = thunkAPI.getState().auth.user.access
-//     return await authService.updateStatus(requestData, accessToken);
-//   }catch (error){
-//     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-//     console.log("getuser details",error.response, error.response.data, error.response.data.message, error.message)
-//     return thunkAPI.rejectWithValue(message);    
-//   }
-// })
 export const updateStatus = createAsyncThunk('auth/updateStatus', async(requestData, thunkAPI) => {
   try{
     const accessToken = thunkAPI.getState().admin.adminUser.access_token
-    console.log("update-",accessToken)
     return await adminService.updateStatus(requestData, accessToken);
   } catch (error) {
     if (error.response && error.response.data) {

@@ -29,7 +29,6 @@ function ProfileEdit() {
     const [gender, setGender] = useState(userInfo?.gender)
     const [deleteProfilePicture, setDeleteProfilePicture] = useState(false);
     const navigate = useNavigate()
-    console.log(userInfo?.profile_picture)
        
     const axiosInstance = useAxios(user?.access);
 
@@ -66,7 +65,7 @@ function ProfileEdit() {
           
         }
         reader.onerror = (error) => {
-          console.error("Error reading image file:", error);
+          toast.error(error);
         };
       
         reader.readAsDataURL(newFile);

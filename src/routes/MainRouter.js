@@ -41,8 +41,7 @@ export default function MainRouter() {
       setWs(ws)
 
       ws.onopen = () => {
-        console.log('CONNECTED TO ONLINE CONSUMER');
-        console.log("user :",loggedin_user)
+        // console.log('CONNECTED TO ONLINE CONSUMER');
         if (ws.readyState === WebSocket.OPEN) {
           ws.send(JSON.stringify({
             'username':loggedin_user,
@@ -70,12 +69,12 @@ export default function MainRouter() {
       };
   
       ws.onclose = () => {
-        console.log('DISCONNECTED FROM ONLINE CONSUMER');
+        // console.log('DISCONNECTED FROM ONLINE CONSUMER');
         setTimeout(connectWebSocket, 5000);
       };
   
       ws.onerror = (error) => {
-        console.error('WebSocket error:', error);
+        // console.error('WebSocket error:', error);
         ws.close()
       };
     }
@@ -89,12 +88,12 @@ export default function MainRouter() {
       setNotify(notify_message)
 
       notify_message.onopen = () => {
-        console.log('CONNECTED TO NOTIFICATION');
+        // console.log('CONNECTED TO NOTIFICATION');
       };
   
     notify_message.onmessage = (event) => {
         const message = JSON.parse(event.data);
-        console.log("notify--:",message)
+        // console.log("notify--:",message)
         if (message.count !== undefined) {
           dispatch(updateUserMessageNotify({ count: message.count }));
         } 
@@ -109,12 +108,12 @@ export default function MainRouter() {
       };
   
       notify_message.onclose = () => {
-        console.log('DISCONNECTED FROM NOTIFICATION');
+        // console.log('DISCONNECTED FROM NOTIFICATION');
         setTimeout(connectNotifyWebSocket, 5000);
       };
   
       notify_message.onerror = (error) => {
-        console.error('WebSocket error:', error);
+        // console.error('WebSocket error:', error);
         notify_message.close();
       };
     }

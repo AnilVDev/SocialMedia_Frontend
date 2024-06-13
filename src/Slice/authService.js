@@ -72,7 +72,6 @@ const resetPasswordConfirm = async (userData) => {
         }
     }
     const response = await axios.post(`${process.env.REACT_APP_API_URL}users/reset_password_confirm/`,userData,config)
-    console.log(response.data)
     return response.data
 }
 
@@ -96,15 +95,13 @@ const getUserInfo = async(axiosInstance,accessToken) => {
 
 //update user info
 const updateUserInfo = async(axiosInstance,formData,accessToken) => {
-    
-    console.log("updateUserInfo--service--")
+
     const config = {
         headers: {
             "Authorization": `Bearer ${accessToken}`,
             "Content-Type": "multipart/form-data"
         }
     }
-    console.log("data in service --**---",formData)
     
     const response = await axiosInstance.patch(`${api}update/`,formData,config)
 
@@ -114,12 +111,10 @@ const updateUserInfo = async(axiosInstance,formData,accessToken) => {
 //update Token
 const updateToken = async(refreshToken) => {
 
-    console.log(refreshToken)
     const response = await axios.post(`${api}token/refresh/`,{refresh: refreshToken })
     if(response.data){
         localStorage.setItem('user', JSON.stringify(response.data))
     }
-    console.log("new token",response.data)
     return response.data   
 }
 
@@ -127,12 +122,11 @@ const updateToken = async(refreshToken) => {
 // refresAccess Token
 const refreshAccessToken = async(refreshToken) => {
 
-    console.log(refreshToken)
     const response = await axios.post(`${api}token/refresh/`,{refresh: refreshToken })
     if(response.data){
         localStorage.setItem('user', JSON.stringify(response.data))
     }
-    console.log("new token",response.data)
+
     return response.data   
 }
 

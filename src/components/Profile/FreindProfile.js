@@ -94,7 +94,6 @@ function FriendProfile() {
 
   const handleFollow = async (e) =>{
     e.preventDefault();
-    console.log("follow clicked")
     const userIdToFollow = userBio.id
     try{
         const response =await addFollower({
@@ -111,7 +110,6 @@ function FriendProfile() {
 
   const handleUnfollow = async (e) =>{
     e.preventDefault();
-    console.log("unfollow clicked")
     const userIdToFollow = userBio.id
     try{
         const response =await removeFollower({
@@ -182,13 +180,12 @@ function FriendProfile() {
         const { data } = await blockUserMutation({
           variables: { blockedBy: userBio.id }
         });
-        console.log('Blocked user:', data.blockUser.blockedUser);
         toast('Blocked')
       } catch (error) {
         if (error.message === "User is not active" || error.message === "Invalid token or user not found") {
           navigate('/login')
         }
-        console.error('Error blocking user:', error);
+        toast.error(error);
       }
         handleMenuClose();
     };

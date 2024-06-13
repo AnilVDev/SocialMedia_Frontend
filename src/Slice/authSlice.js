@@ -44,7 +44,6 @@ export const register = createAsyncThunk('auth/register',
         errorMessage = error.message;
       }
 
-      console.error(errorMessage); 
       return thunkAPI.rejectWithValue(errorMessage);
     }
   }
@@ -86,7 +85,6 @@ export const activate = createAsyncThunk('auth/activate', async (userData, thunk
     await authService.activate(userData);
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-    console.log(error.response,error.response.data,error.response.data.message,error.message)
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -133,11 +131,9 @@ export const updateUserInfo = createAsyncThunk('auth/updateUserInfo', async({axi
     if (!response) {
       return thunkAPI.rejectWithValue('Failed to update user info');
     }
-    console.log(response,response.data)
     return response.data;
   }catch (error){
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-    console.log("updateUser details--**-",error.response, error.response.data, error.response.data.message, error.message)
     return thunkAPI.rejectWithValue(message);    
   }
 })
@@ -146,11 +142,9 @@ export const updateUserInfo = createAsyncThunk('auth/updateUserInfo', async({axi
 export const updateToken = createAsyncThunk('auth/updateToken', async(_, thunkAPI) => {
   try{
     const refreshToken = thunkAPI.getState().auth.user.refresh
-    console.log("refresh in slice --",refreshToken)
     return await authService.updateToken(refreshToken);
   }catch (error){
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-    console.log("update token",error.response, error.response.data, error.response.data.message, error.message)
     return thunkAPI.rejectWithValue(message);    
   }
 })

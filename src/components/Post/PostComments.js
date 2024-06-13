@@ -16,7 +16,6 @@ function PostComments({ postId }) {
   });
 
   const handleButtonClick = (event) => {
-    console.log("popper is clicked ")
     setAnchorEl(event.currentTarget);
     setShowComments(!showComments);
   };

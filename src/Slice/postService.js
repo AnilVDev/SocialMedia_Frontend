@@ -6,7 +6,6 @@ const graphqlUrl = process.env.REACT_APP_GRAPHQL_API
 
 // get user bio
 const getBio = async (axiosInstance,{query},accessToken) => {
-    console.log('servi g e t b i o')
     const config = {
         headers: {
             "Authorization": `Bearer ${accessToken}`
@@ -18,14 +17,12 @@ const getBio = async (axiosInstance,{query},accessToken) => {
 
 // create new post
 const createPost = async (axiosInstance,{mutation},accessToken) => {
-    console.log('servi create post **')
     const config = {
         headers: {
             "Authorization": `Bearer ${accessToken}`,
             "Content-Type": "application/json"
         }
     }
-    console.log("E R RO R ")
     const response = await axiosInstance.post(graphqlUrl,{mutation},config)
     return response.data
 }

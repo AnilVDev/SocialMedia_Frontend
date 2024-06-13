@@ -10,7 +10,6 @@ import "../Login-SignUp/style.css";
 function AccountVerification() {  
     
         const { uid, token } = useParams()
-        console.log("UID:", uid);
         const dispatch = useDispatch()
         const navigate = useNavigate()
     

@@ -55,7 +55,6 @@ function Post() {
       navigate('/login')
     }
     toast.error(error.message,{ toastId: 'errorMessage' });
-    console.log("error in post",error.message)
   }
 
   useEffect(()=>{

@@ -18,7 +18,6 @@ function NewsFeedComment({ postId }) {
   });
 
   const handleButtonClick = (event) => {
-    console.log("popper is clicked ")
     setAnchorEl(anchorEl ? null : event.currentTarget);
     setShowComments(!showComments);
   };

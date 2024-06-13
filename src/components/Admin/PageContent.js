@@ -91,9 +91,6 @@ import { Button, IconButton } from '@mui/material';
   }
 
   const handleSaveUser = () => {
-    // Handle saving logic here, for example, dispatch an action to update the data in Redux store
-    console.log('Edited data:', editedData);
-    // Reset the editing state
     setEditingRowId(null);
     setEditedData({});
   };

@@ -191,7 +191,6 @@ export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMouseEnter = (event) => {
-    console.log("mouse enter")
     setAnchorEl(event.currentTarget);
   };
 
@@ -213,7 +212,7 @@ export default function Navbar() {
         <DrawerHeader >
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
         <Avatar
-          alt={userInfo.username}
+          alt=""
           src={userInfo.profile_picture}
           onClick={() => navigate('/profile')}
           sx={{ cursor: 'pointer' }}

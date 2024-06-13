@@ -37,7 +37,6 @@ const getUserList = async(accessToken) => {
             "Authorization": `Bearer ${accessToken}`
         }
     }
-    console.log(`${API_URL}api/userlist/`)
 
     const response = await axios.get(`${API_URL}userlist/`,config)
 
@@ -52,7 +51,6 @@ const updateStatus = async(requestData,accessToken) => {
             // "Content-Type": "multipart/form-data"
         }
     }
-     console.log("api-",requestData,config)
     const response = await axios.put(`${API_URL}update-status/`,requestData,config)
     return response.data   
 }

@@ -20,33 +20,16 @@ const useAxios = () => {
     axiosInstance.interceptors.request.use(async req => {
     
         const userToken = jwtDecode(user.access)
-        // console.log("old access-",user.access)
         const isExpired = dayjs.unix(userToken.exp).diff(dayjs()) < 1; 
-        // console.log("expiee --",isExpired)
     
         if(!isExpired) return req
-    
-        // const response = await axios.post(`${baseURL}/api/token/refresh/`, {
-        //     refresh: authTokens.refresh
-        //   });
-    
-        // localStorage.setItem('user', JSON.stringify(response.data))
-        
-        // setAuthTokens(response.data)
-        // setUser(jwt_decode(response.data.access))
-        // dispatch(updateToken())
-        // console.log("new access-",user.access)
-        // req.headers.Authorization = `Bearer ${user.access}`
-        // return req
 
         try {
             const response = await dispatch(updateToken());
-            console.log("-useAxios----",response)
             req.headers.Authorization = `Bearer ${response.payload.access}`;
-            // console.log("new access-",response.payload.access)
             return req;
           } catch (error) { 
-            console.error("Token refresh error:", error);
+              toast.error(error);
             throw error;
           }
     })

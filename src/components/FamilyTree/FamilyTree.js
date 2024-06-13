@@ -27,7 +27,7 @@ function FamilyTree() {
   const [addRelation] = useMutation(CREATE_USER_RELATION);
   const [deleteRelation] = useMutation(DELETE_RELATION_MUTATION)
   const [searchUsers] = useMutation(SEARCH_USERS_MUTATION)
-console.log("relations:",familyData)
+
 
   const handleSearchChange = (e) => {
     e.preventDefault()
@@ -64,7 +64,7 @@ console.log("relations:",familyData)
         setRelationType('');
         refetchFamilyTree();
       } catch (error) {
-        console.error('Error:', error);
+          toast.error(error);
       }
     }
   };

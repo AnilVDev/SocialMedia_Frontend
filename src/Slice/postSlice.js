@@ -30,7 +30,6 @@ const initialState = {
         }`;
         try {
           const accessToken = thunkAPI.getState().auth.user.access
-          console.log('g e t b i o',accessToken)
           if (!accessToken) {
             return thunkAPI.rejectWithValue('Access token is missing');
           }
@@ -41,7 +40,6 @@ const initialState = {
               return response
         }catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log("get User details graph --**-",error.response, error.response.data, error.response.data.message, error.message)
             return thunkAPI.rejectWithValue(message);         
         }
     }

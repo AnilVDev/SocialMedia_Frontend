@@ -16,7 +16,6 @@ const api = process.env.REACT_APP_MEDIA_API;
 
 export default function FriendFollowers() {
     const { username } = useParams();
-    console.log("userr--",username); 
   const [open, setOpen] = useState(true);
   const { loading, error, data,refetch } = useQuery(GET_USER_BY_USERNAME, { variables: { username: username }  });
   const userBio = data?.searchedUser.user || {};

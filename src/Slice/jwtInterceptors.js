@@ -14,22 +14,17 @@ const createJwtInterceptors = () => {
 
     jwtInterceptors.interceptors.response.use(
     (response) => {
-        console.log("success")
         return response;
     },
     async (error) => {
-        console.log("failed")
         if (error.response.status === 401) {
         try {
         
             const newAccessToken = await dispatch(refreshAccessToken());
             error.config.headers.Authorization = `Bearer ${newAccessToken.access}`;
-            // localStorage.setItem('user', JSON.stringify(newAccessToken))
             return axios(error.config); 
         } catch (refreshError) {
-            console.error('Refresh token failed:', refreshError);
             localStorage.removeItem('user');
-            // dispatch(reset());
             return Promise.reject(refreshError);
         }
         }

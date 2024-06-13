@@ -123,8 +123,7 @@ function IndividualPostDialog() {
   }
 
   const handleEditPost = () => {
-    console.log("edit modal clicked")
-    // handleCloseModal()
+
     setEditedDate(selectedPost.dataOfMemory)
     setEditedDescription(selectedPost.description)
     setEditedPrivacy(selectedPost.privacySettings)
@@ -171,7 +170,6 @@ function IndividualPostDialog() {
 
   const handleSaveChanges = async () => {
     try {
-      console.log("updating...",editedDate,editedDescription,editedPrivacy)
       const response = await updatePostMutation({
         variables: {
           id: selectedPost.id,
@@ -190,7 +188,7 @@ function IndividualPostDialog() {
         toast.error('Failed to update post');
       }
     } catch (error) {
-      console.error('An error occurred while updating the post:', error.message);
+        toast.error(error.message);
     }
   };
   
