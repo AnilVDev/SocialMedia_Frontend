@@ -61,13 +61,12 @@ const ChatWindow = () => {
 
   useEffect(()=>{
     const response=messageSeenMutation({variables:{username}})
-    console.log("response--",response)
     recentChatRefetch()
   },[])
 
   useEffect(() => {
 
-    const ws = new WebSocket(`ws://localhost:8000/ws/${username}/?token=${access_token}`);
+    const ws = new WebSocket(`wss://51.21.144.92/ws/${username}/?token=${access_token}`);
     setWs(ws);
 
     ws.onopen = () => {
