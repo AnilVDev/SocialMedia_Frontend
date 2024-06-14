@@ -19,7 +19,8 @@ const api = process.env.REACT_APP_MEDIA_API;
 
 function Post() {
   const { loading, error, data:newsFeedData,refetch:newsFeedRefetch } = useQuery(NEWSFEED_POSTS_QUERY);
-  const [comment, setComment] = useState('');
+  // const [comment, setComment] = useState('');
+  const [comment, setComment] = useState({});
   const [addCommentMutation, { loading:addCommentLoading,data:addCommentData}] = useMutation(CREATE_COMMENT)
   const {refetch: allCommentsRefetch} = useQuery(ALL_COMMENTS, {skip: true})
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function Post() {
   //   setComment(event.target.value);
   // };
   const handleCommentChange = (postId, event) => {
-    setComments({ ...comments, [postId]: event.target.value });
+    setComment({ ...comment, [postId]: event.target.value });
   };
 
   const handleCommentSubmit = async (post_id) =>{
@@ -137,7 +138,7 @@ function Post() {
           placeholder="comment"
           // value={comment}
           // onChange={handleCommentChange}
-          value={comments[post.id] || ''}
+          value={comment[post.id] || ''}
           onChange={(event) => handleCommentChange(post.id, event)}
           maxLength={500} 
           sx={{ 
