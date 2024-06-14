@@ -35,6 +35,7 @@ function Post() {
   };
 
   const handleCommentSubmit = async (post_id) =>{
+    const comment = comment[post_id];
     const trimmedComment = comment.trim();
 
     if (trimmedComment === '') {
