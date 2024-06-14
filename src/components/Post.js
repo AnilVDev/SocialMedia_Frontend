@@ -31,24 +31,28 @@ function Post() {
   };
 
   const handleCommentSubmit = async (post_id) =>{
-    if (comment.trim()) {
-      try{
-        const response = await addCommentMutation({
-          variables : {
-            post_id,
-            comment
-          }
-        })
-        if (response.data.addComment.success){
-          toast.success('comment updated')
-          setComment('')
-          allCommentsRefetch({ postId: post_id })
-        }else{
-          toast.error('Failed to update the comment')
+    const trimmedComment = comment.trim();
+
+    if (trimmedComment === '') {
+      toast.error('Comment cannot be empty');
+      return; 
+    }
+    try{
+      const response = await addCommentMutation({
+        variables : {
+          post_id,
+          comment
         }
-      }catch(error){
-        toast.error(error.message)
+      })
+      if (response.data.addComment.success){
+        toast.success('comment updated')
+        setComment('')
+        allCommentsRefetch({ postId: post_id })
+      }else{
+        toast.error('Failed to update the comment')
       }
+    }catch(error){
+      toast.error(error.message)
     }
   }
 
