@@ -72,6 +72,7 @@ function ForgotPasswordConfirm() {
             name="new_password"
             value={state.new_password}
             onChange={handleChange}
+            required
             />
             <input
             type="password"
@@ -79,6 +80,7 @@ function ForgotPasswordConfirm() {
             placeholder="Confirm"
             value={state.re_new_password}
             onChange={handleChange}
+            required
             />
             
             <button>Submit</button>

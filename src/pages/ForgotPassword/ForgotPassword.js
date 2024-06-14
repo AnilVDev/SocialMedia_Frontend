@@ -27,6 +27,10 @@ function ForgotPassword() {
     
         const handleSubmit = e =>{
         e.preventDefault()
+        if (!email) {
+          toast.error('Please enter your email');
+          return;
+        }
         const userData ={ email }
     
         dispatch(resetPassword(userData))
@@ -63,7 +67,8 @@ function ForgotPassword() {
                     <div className="overlay">
                       <div className="overlay-panel overlay-right">
                         <h1>Click here</h1>
-                        <input type="text"
+                        <input 
+                            type="email"
                             placeholder="email"
                             name="email"
                             onChange={handleChange}

@@ -26,8 +26,11 @@ function Post() {
   const { newPost } = useSelector(state => state.messageNotify)
   const dispatch = useDispatch()
   
-  const handleCommentChange = (event) => {
-    setComment(event.target.value);
+  // const handleCommentChange = (event) => {
+  //   setComment(event.target.value);
+  // };
+  const handleCommentChange = (postId, event) => {
+    setComments({ ...comments, [postId]: event.target.value });
   };
 
   const handleCommentSubmit = async (post_id) =>{
@@ -132,8 +135,10 @@ function Post() {
       <Textarea
           aria-label="comment"
           placeholder="comment"
-          value={comment}
-          onChange={handleCommentChange}
+          // value={comment}
+          // onChange={handleCommentChange}
+          value={comments[post.id] || ''}
+          onChange={(event) => handleCommentChange(post.id, event)}
           maxLength={500} 
           sx={{ 
             flex: 1, 
