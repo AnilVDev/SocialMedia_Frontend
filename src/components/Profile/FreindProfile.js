@@ -130,22 +130,24 @@ function FriendProfile() {
   };
 
   const handleCommentSubmit = async (post_id) =>{
-    try{
-      const response = await addCommentMutation({
-        variables : {
-          post_id,
-          comment
+    if (comment.trim()) {
+      try{
+        const response = await addCommentMutation({
+          variables : {
+            post_id,
+            comment
+          }
+        })
+        if (response.data.addComment.success){
+          toast.success('comment updated')
+          setComment('')
+          allCommentsRefetch({ postId: post_id })
+        }else{
+          toast.error('Failed to update the comment')
         }
-      })
-      if (response.data.addComment.success){
-        toast.success('comment updated')
-        setComment('')
-        allCommentsRefetch({ postId: post_id })
-      }else{
-        toast.error('Failed to update the comment')
+      }catch(error){
+        toast.error(error.message)
       }
-    }catch(error){
-      toast.error(error.message)
     }
   }
 
