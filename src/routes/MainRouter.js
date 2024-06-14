@@ -37,7 +37,7 @@ export default function MainRouter() {
 
    const connectWebSocket = () =>{
     if (user && access_token && loggedin_user){
-      const ws  = new WebSocket(`wss://51.21.144.92/ws/online/?token=${access_token}`)
+      const ws  = new WebSocket(`wss://www.konnectify.info/ws/online/?token=${access_token}`)
       setWs(ws)
 
       ws.onopen = () => {
@@ -84,7 +84,7 @@ export default function MainRouter() {
 
   const connectNotifyWebSocket = () =>{
      if (user && access_token && loggedin_user){
-      const notify_message  = new WebSocket(`wss://51.21.144.92/ws/notify/?token=${access_token}`)
+      const notify_message  = new WebSocket(`wss://www.konnectify.info/ws/notify/?token=${access_token}`)
       setNotify(notify_message)
 
       notify_message.onopen = () => {

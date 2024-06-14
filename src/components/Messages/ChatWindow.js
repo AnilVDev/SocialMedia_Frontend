@@ -66,7 +66,7 @@ const ChatWindow = () => {
 
   useEffect(() => {
 
-    const ws = new WebSocket(`wss://51.21.144.92/ws/${username}/?token=${access_token}`);
+    const ws = new WebSocket(`wss://www.konnectify.info/ws/${username}/?token=${access_token}`);
     setWs(ws);
 
     ws.onopen = () => {
