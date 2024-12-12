@@ -3,7 +3,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import adminService from './adminService';
 
-const apiUrl = "http://localhost:8000/authenticate/";
 
 //get admin from local storage
 const adminUser = JSON.parse(localStorage.getItem('adminUser'))
