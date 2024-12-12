@@ -5,8 +5,6 @@ import authService from './authService';
 import { client } from '../index';
 
 
-const apiUrl = "http://localhost:8000/api/";
-
 //get user from local storage
 const user = JSON.parse(localStorage.getItem('user'))
 const userInfo = JSON.parse(localStorage.getItem('userInfo'))

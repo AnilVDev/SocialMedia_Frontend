@@ -10,8 +10,7 @@ const graphql_api = process.env.REACT_APP_GRAPHQL_API
 
 
 const httpLink = new HttpLink({
-  // uri: 'http://127.0.0.1:8000/graphql/',
-  uri: graphql_api
+    uri: graphql_api
 });
 const authMiddleware = new ApolloLink((operation, forward) => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -33,20 +32,6 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 
 
 const cache = new InMemoryCache();
-// const uri = 'http://127.0.0.1:8000/graphql/'
-// const uploadLink = createUploadLink({
-//   uri: 'http://127.0.0.1:8000/graphql/',
-// });
-
-// const link = concat(authMiddleware, uploadLink);
-
-// const link =createUploadLink( { uri })
-
-// const client = new ApolloClient({
-//   cache,
-//   link 
-// });
-
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
