@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify'
 import { register, reset } from "../../Slice/authSlice";
 import Spinner from "../../components/Spinner";
+import { Box, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl, CircularProgress, useMediaQuery } from '@mui/material';
 
 function SignUpForm() {
     const [state, setState] = useState({
@@ -18,6 +19,7 @@ function SignUpForm() {
     });
     const [gender, setGender] = useState('');
     const [errorShown, setErrorShown] = useState(false);
+    const isMediumScreen = useMediaQuery("(max-width:768px)");
 
   const { first_name, last_name, username, email, password, re_password } = state;
   
@@ -80,122 +82,246 @@ function SignUpForm() {
 
   return (
 
-    <div className="App">
-      <h2>Konnectify</h2>
-      <div className='container right-panel-active' id="container">
 
-      <div className="form-container sign-up-container">
-      <form onSubmit={handleOnSubmit}>
-        <h1>Create Account</h1>
-        {/* <div className="social-container">
-          <a href="#" className="social">
-            <i className="fab fa-facebook-f" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-google-plus-g" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-linkedin-in" />
-          </a>
-        </div>
-        <span>or use your email for registration</span> */}
-        <div style={{display:"flex"}}>
-        <input
-            style={{marginRight:"5px"}}
-          type="text"
-          name="first_name"
-          value={state.first_name}
-          onChange={handleChange}
-          placeholder="Firstname"
-          required
-        />
-                <input
-          type="text"
-          name="last_name"
-          value={state.last_name}
-          onChange={handleChange}
-          placeholder="Lastname"
-          required
-        />
+<Box
+  sx={{
+    textAlign: "center",
+    fontFamily: "Montserrat, sans-serif",
+    backgroundColor: "#f6f5f7",
+    minHeight: "100vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: isMediumScreen ? "column" : "row", // Stack vertically on small screens
+    overflow: "visible", // Ensure that no content is clipped
+  }}
+>
+  <Box
+    sx={{
+      width: "100%",
+      maxWidth: 768,
+      minHeight: 480,
+      backgroundColor: "#fff",
+      borderRadius: 2,
+      boxShadow: "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)",
+      display: "flex",
+      flexDirection: isMediumScreen ? "column" : "row",
+      overflow: "visible", // Ensure no content is clipped in column view
+      position: "relative",
+    }}
+  >
+    {/* Sign-Up Container */}
+    <Box
+      sx={{
+        width: isMediumScreen ? "100%" : "50%",
+        background: "linear-gradient(to right, #ff4b2b, #ff416c)",
+        color: "#fff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        padding: { xs: 3, sm: 4, md: 4 },
+        order: isMediumScreen ? 1 : 0, // On small screens, Sign-Up comes first
+        borderTopLeftRadius: isMediumScreen ? 2 : 2, // Keep top-left radius consistent
+        borderTopRightRadius: isMediumScreen ? 2 : 2, // Keep top-right radius consistent
+      }}
+    >
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: "bold",
+          marginBottom: { xs: 1, sm: 1, md: 2 },
+          fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' }, // Adjust font size for different screen sizes
+        }}
+      >
+        Welcome Back!
+      </Typography>
+      <Typography
+        sx={{
+          fontWeight: 100,
+          mb: { xs: 1, sm: 1, md: 2 },
+          fontSize: { sm: '0.8rem', md: '1rem' }, // Adjust font size for different screen sizes
+          textAlign: "center",
+          lineHeight: 1.5,
+        }}
+      >
+        To keep connected with us please login with your personal info
+      </Typography>
 
-        </div>
-        <input
+      <Button
+        variant="outlined"
+        sx={{
+          mt: 2,
+          px: 5,
+          py: 1,
+          borderRadius: 20,
+          borderColor: "#fff",
+          color: "#fff",
+          textTransform: "uppercase",
+          "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.2)", borderColor: "#fff" },
+        }}
+        onClick={() => navigate('/login')}
+      >
+        Sign In
+      </Button>
+    </Box>
+
+    {/* Sign-Up Container */}
+    <Box
+      sx={{
+        width: isMediumScreen ? "100%" : "50%",
+        padding: 2,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        order: isMediumScreen ? 0 : 1, // On small screens, Sign-In comes second
+        borderTopLeftRadius: isMediumScreen ? 2 : 2, // Keep top-left radius consistent
+        borderTopRightRadius: isMediumScreen ? 2 : 2, // Keep top-right radius consistent
+      }}
+    >
+      <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: { sm: 1, md: 2 }, mt: 3 }}>
+        Create Account
+      </Typography>
+      <form onSubmit={handleOnSubmit} style={{ width: "100%" }}>
+        <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+          <TextField
+            type="text"
+            name="first_name"
+            value={state.first_name}
+            onChange={handleChange}
+            placeholder="Firstname"
+            fullWidth
+            required
+            sx={{
+              backgroundColor: "#eee",
+              borderRadius: 1,
+              "& .MuiInputBase-root": { height: { xs: "35px", md: "40px" } },
+            }}
+          />
+          <TextField
+            type="text"
+            name="last_name"
+            value={state.last_name}
+            onChange={handleChange}
+            placeholder="Lastname"
+            fullWidth
+            required
+            sx={{
+              backgroundColor: "#eee",
+              borderRadius: 1,
+              "& .MuiInputBase-root": { height: { xs: "35px", md: "40px" } },
+            }}
+          />
+        </Box>
+
+        <TextField
           type="text"
           name="username"
           value={state.username}
           onChange={handleChange}
           placeholder="Username"
+          fullWidth
           required
+          sx={{
+            mb: 2,
+            backgroundColor: '#eee',
+            borderRadius: 1,
+            '& .MuiInputBase-root': { height: { xs: "35px", md: "40px" } }
+          }}
         />
-        <input
+
+        <TextField
           type="email"
           name="email"
           value={state.email}
           onChange={handleChange}
           placeholder="Email"
+          fullWidth
           required
+          sx={{
+            mb: 2,
+            backgroundColor: '#eee',
+            borderRadius: 1,
+            '& .MuiInputBase-root': { height: { xs: "35px", md: "40px" } },
+          }}
         />
-        <input
+
+        <TextField
           type="password"
           name="password"
           value={state.password}
           onChange={handleChange}
           placeholder="Password"
+          fullWidth
           required
+          sx={{
+            mb: 2,
+            backgroundColor: '#eee',
+            borderRadius: 1,
+            '& .MuiInputBase-root': { height: { xs: "35px", md: "40px" } },
+          }}
         />
-        <input
+
+        <TextField
           type="password"
           name="re_password"
           value={state.re_password}
           onChange={handleChange}
           placeholder="Confirm"
+          fullWidth
           required
+          sx={{
+            mb: 2,
+            backgroundColor: '#eee',
+            borderRadius: 1,
+            '& .MuiInputBase-root': { height: { xs: "35px", md: "40px" } },
+          }}
         />
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-              <label htmlFor="gender" style={{ marginRight: '10px' }}>Gender:</label>
-              <select
-                name="gender"
-                value={gender}
-                onChange={handleGenderChange}
-                required
-                style={{
-                  width: '100%',
-                  padding: '10px',
-                  marginBottom: '10px',
-                  borderRadius: '4px',
-                  border: '1px solid #ccc',
-                  fontSize: '16px',
-                }}
-              >
-                <option value="">Select </option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
-        <button>Sign Up</button>
-        {isLoading && <Spinner/>}
-      </form>
-    </div>
 
-        <div className="overlay-container">
-          <div className="overlay">
-            <div className="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <p>
-                To keep connected with us please login with your personal info
-              </p>
-              <button
-                className="ghost"
-                id="signIn"
-                onClick={() => navigate('/login')}
-              >
-                Sign In
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <FormControl fullWidth sx={{ mb: 2 }}>
+          <InputLabel sx={{ height: { xs: "35px", md: "40px" } }}>Gender</InputLabel>
+          <Select
+            value={gender}
+            onChange={handleGenderChange}
+            required
+            sx={{
+              backgroundColor: '#eee',
+              borderRadius: 1,
+              '& .MuiInputBase-root': { height: { xs: "35px", md: "40px" } },
+            }}
+          >
+            <MenuItem value="">Select</MenuItem>
+            <MenuItem value="male">Male</MenuItem>
+            <MenuItem value="female">Female</MenuItem>
+          </Select>
+        </FormControl>
+
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            borderRadius: "20px",
+            backgroundColor: "#ff4b2b",
+            color: "#ffffff",
+            fontSize: "12px",
+            fontWeight: "bold",
+            padding: "12px 45px",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
+          }}
+        >
+          Sign Up
+        </Button>
+
+        {isLoading && <CircularProgress sx={{ mt: 2 }} />}
+      </form>
+    </Box>
+  </Box>
+</Box>
+
+
+
 
   );
 }
