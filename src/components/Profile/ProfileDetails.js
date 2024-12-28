@@ -59,6 +59,7 @@ function ProfileDetails() {
   const [editedDate,setEditedDate] = useState(selectedPost?.dataOfMemory)
   const [editedPrivacy,setEditedPrivacy] = useState(selectedPost?.privacySettings)
   const [openEditPostModal, setOpenEditPostModal] = useState(false);
+  
 
   const {data:followingUsersData,refetch:followingUsersRefetch} = useQuery(FOLLOWING)
   const numberOfFollowingUsers = followingUsersData?.following?.length || 0;
@@ -201,7 +202,6 @@ function ProfileDetails() {
 
 
 
-
     useEffect(() => {
         dispatch(getBio(axiosInstance));
         if (selectedPostIndex !== null && selectedPostIndex >= 0 && selectedPostIndex < posts.length) {
@@ -212,9 +212,16 @@ function ProfileDetails() {
         };
     }, []);
   return (
-    <Stack>
+    <Stack
+    sx={{
+      height: '100vh', // Full screen height
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+    }}
+    >
         <CssBaseline />
-        <Stack direction="row" spacing={4} marginTop={22}>
+        <Stack direction="row" spacing={4} marginTop={3}>
             <Box>
                 <Avatar src={`${api}${userBio?.profilePicture}`} sx={{ width: 150, height: 150, marginBottom: 2 }} />
                 <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 'large' }}>{userBio?.firstName} {userBio?.lastName}</Typography>
@@ -294,23 +301,30 @@ function ProfileDetails() {
           </Grid>
         )}
       </Grid>
-      <Grid item xs={12}>
-        {/* Followers/Following counts section */}
-        <ImageList sx={{ width: 750, height: 450 }} cols={4} rowHeight={224}>
-          {loading && <Spinner/>}
-            {posts.map((post) => (
-                <ImageListItem key={post.id}>
-                <img
-                    srcSet={`${post.image}?w=184&h=184&fit=crop&auto=format&dpr=2 2x`}
-                    src={`${api}${post.image}`} 
-                    // alt={item.title}
-                    onClick={() => handleImageClick(post)}
-                    loading="lazy"
-                />
-                </ImageListItem>
-            ))}
-        </ImageList>
-      </Grid>
+      <Grid item xs={12} sx={{ overflowY: 'auto', maxHeight: 'calc(100vh - 200px)' }}>
+  <ImageList
+    sx={{
+      width: '100%',
+      maxWidth: 750,
+      overflowY: 'auto', // Enable vertical scroll
+    }}
+    cols={4}
+  >
+    {loading && <Spinner />}
+    {posts.map((post) => (
+      <ImageListItem key={post.id}>
+        <img
+          src={`${api}${post.image}`}
+          srcSet={`${post.image}?w=184&h=184&fit=crop&auto=format&dpr=2 2x`}
+          alt="Post Image"
+          onClick={() => handleImageClick(post)}
+          loading="lazy"
+        />
+      </ImageListItem>
+    ))}
+  </ImageList>
+</Grid>
+
 
 {/* See individual Post */}
       <Dialog open={openModal} onClose={handleCloseModal} maxWidth='md' sx={{ zIndex: 9 }}>

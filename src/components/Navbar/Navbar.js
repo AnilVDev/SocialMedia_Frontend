@@ -24,12 +24,12 @@ import useAxios from '../../Slice/useAxios';
 import { useSelector } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search'
 import InputBase from '@mui/material/InputBase';
-import { Avatar, Badge, Box, Menu, MenuItem, Tooltip } from '@mui/material';
+import { Avatar, Badge, Box, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
 import Notification from '../Notification/Notification';
 import { clearMessageCount } from '../../Slice/messageNotificationSlice';
 
 
-
+const api = process.env.REACT_APP_MEDIA_API;
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -157,6 +157,7 @@ export default function Navbar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user,userInfo } = useSelector((state) => state.auth);
+  const urlPath = userInfo?.profile_picture.split("/media/")[1];
  
   const axiosInstance = useAxios(user?.access);
 
@@ -164,9 +165,6 @@ export default function Navbar() {
       dispatch(getUserInfo(axiosInstance));
   }, []);
 
-  useEffect(() =>{
-    
-  })
 
   const handleDrawerOpen = () => {
     setNotfication(true);
@@ -203,21 +201,35 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
+  const isMediumOrSmaller = useMediaQuery('(max-width: 900px)');
+
+  // Set the Drawer `open` based on the screen size
+  const [drawerOpen, setDrawerOpen] = useState(!isMediumOrSmaller);
+
+  // Update the drawer state when the screen size changes
+  useEffect(() => {
+    setDrawerOpen(!isMediumOrSmaller);
+  }, [isMediumOrSmaller]);
+
   return (
 
 
     <>
 
-      <Drawer variant="permanent" open={true}>
+<Drawer variant='permanent' open={drawerOpen}>
         <DrawerHeader >
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
         <Avatar
           alt=""
-          src={userInfo?.profile_picture}
+          src={`${api}${urlPath}`}
           onClick={() => navigate('/profile')}
           sx={{ cursor: 'pointer' }}
         />
-        <Typography sx={{fontStyle:'oblique', fontWeight:'bold'}}>{userInfo?.first_name} {userInfo?.last_name}</Typography>
+          {drawerOpen && (
+    <Typography sx={{ fontStyle: 'oblique', fontWeight: 'bold' }}>
+      {userInfo?.first_name} {userInfo?.last_name}
+    </Typography>
+  )}
       </Box>
         </DrawerHeader>
         <Divider />

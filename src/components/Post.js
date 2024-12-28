@@ -83,93 +83,109 @@ function Post() {
     <>
     
     <div style={{ height: '700px', overflowY: 'auto' }}>
-      {loading && <Spinner/>}
-    {newsFeedData?.newsfeedPosts && newsFeedData.newsfeedPosts.map(post => (
-    <Card sx={{ m: 5, zIndex: 9, borderRadius:1, boxShadow: '0 0 10px rgba(0, 0, 0, 0.15)' }} key={post.id} >
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: "red", cursor:'pointer' }} aria-label="recipe"
-          src = {`${api}${post.user.profilePicture}`} 
-          onClick={() => navigate(`/${post.user.username}`)}
-          > 
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVert />
-          </IconButton>
-        }
-        title={
-          <span 
-            style={{ cursor: 'pointer', fontSize: '15px', fontWeight: 'bold' }} 
-            onClick={() => navigate(`/${post.user.username}`)}
-          >
-            {post.user.firstName} {post.user.lastName}
-          </span>
-        }
-        subheader = {post &&
-          new Date(post.postedAt).toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-          })}
-      />
-      <CardMedia
-        component="img"
-        height="20%"
-        image={`${api}${post.image}`} 
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-         @{post.user.username} - {post.description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <IsLikedButton postId = { post?.id } />
-        </IconButton>
-        {/* <IconButton aria-label="share">
-          <Share />
-        </IconButton> */}
-      </CardActions>
-      <CardContent style={{ display: 'flex', alignItems: 'center', marginBottom:'15px' }}>
-      <Textarea
-          aria-label="comment"
-          placeholder="comment"
-          // value={comment}
-          // onChange={handleCommentChange}
-          value={comments[post.id] || ''}
-          onChange={(event) => handleCommentChange(post.id, event)}
-          maxLength={500} 
-          sx={{ 
-            flex: 1, 
-            minHeight: 30, 
-            marginRight: '10px',
-            fontFamily: 'Arial, sans-serif',
-            border: '2px solid #ccc',
-            borderRadius: '4px', 
-            alignContent: 'center'
+  {loading && <Spinner />}
+  {newsFeedData?.newsfeedPosts &&
+    newsFeedData.newsfeedPosts.map(post => (
+      <Card
+        sx={{ m: 5, zIndex: 9, borderRadius: 1, boxShadow: '0 0 10px rgba(0, 0, 0, 0.15)' }}
+        key={post.id}
+      >
+        <CardHeader
+          avatar={
+            <Avatar
+              sx={{ bgcolor: 'red', cursor: 'pointer' }}
+              aria-label="recipe"
+              src={`${api}${post.user.profilePicture}`}
+              onClick={() => navigate(`/${post.user.username}`)}
+            />
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVert />
+            </IconButton>
+          }
+          title={
+            <span
+              style={{ cursor: 'pointer', fontSize: '15px', fontWeight: 'bold' }}
+              onClick={() => navigate(`/${post.user.username}`)}
+            >
+              {post.user.firstName} {post.user.lastName}
+            </span>
+          }
+          subheader={post &&
+            new Date(post.postedAt).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+            })}
+        />
+        <CardMedia
+          component="img"
+          image={`${api}${post.image}`}
+          alt="Paella dish"
+          sx={{
+            height: { xs: "150px", sm: "200px", md: "250px", lg: "350px", xl: "400px" }, // Responsive heights
+            width: "100%", 
+            objectFit: "contain", 
+            backgroundColor: "#f0f0f0",
           }}
+        />
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            @{post.user.username} - {post.description}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <IsLikedButton postId={post?.id} />
+          </IconButton>
+        </CardActions>
+        <CardContent
+          style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}
+        >
+          <Textarea
+            aria-label="comment"
+            placeholder="comment"
+            value={comments[post.id] || ''}
+            onChange={event => handleCommentChange(post.id, event)}
+            maxLength={500}
+            sx={{
+              flex: 1,
+              minHeight: 30,
+              marginRight: '10px',
+              fontFamily: 'Arial, sans-serif',
+              border: '2px solid #ccc',
+              borderRadius: '4px',
+              alignContent: 'center',
+            }}
           />
-              <Button
-                 variant="contained" 
-                 size='small'
-                  color="primary" 
-                  onClick={() => handleCommentSubmit(post.id)}
-                  disabled={addCommentLoading} 
-                  sx={{position: 'relative' }} 
-                  
-              >
-                {addCommentLoading && <CircularProgress size={24} sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}/>}
-                {!addCommentLoading ? 'Post':'Posting'}
-              </Button>
-            </CardContent>
-              <NewsFeedComment postId = {post?.id} /> 
-    </Card>
-    ))
-      }
-      </div>
+          <Button
+            variant="contained"
+            size="small"
+            color="primary"
+            onClick={() => handleCommentSubmit(post.id)}
+            disabled={addCommentLoading}
+            sx={{ position: 'relative' }}
+          >
+            {addCommentLoading && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              />
+            )}
+            {!addCommentLoading ? 'Post' : 'Posting'}
+          </Button>
+        </CardContent>
+        <NewsFeedComment postId={post?.id} />
+      </Card>
+    ))}
+</div>
+
     </>
   )
 }
