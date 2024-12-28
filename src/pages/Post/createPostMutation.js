@@ -160,109 +160,145 @@ export default function CreatePostMutation() {
   
 
   return (
-    <React.Fragment>
-        {loading && uploading && 'Uploading...'}
-        { data?.success && success && 'Post uploaded successfully...'}
-        <form onSubmit={handleSubmit} encType="multipart/form-data">  
-        {/* <Button variant="outlined" onClick={handleClickOpen}>
-            Open responsive dialog
-        </Button> */}
-        <Dialog
-            fullScreen={fullScreen}
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="responsive-dialog-title"
-            fullWidth
-        >
-            <DialogTitle id="responsive-dialog-title">
-            {"Post"}
-            </DialogTitle>
-            <DialogContent>
-            <DialogContentText>
-                <InputWrapper>
-                <Typography variant="body1">
-                    Who can see?
-                </Typography>
-                <Box
-                    display="flex"
-                    justifyContent="flex-start"
-                    marginLeft={2}
-                >
-                    <Switch
-                    checked={switchValue}
-                    onChange={() => setSwitchValue(!switchValue)}
-                    />
-                </Box>
-                <Typography variant="body1">
-                    {switchValue ? 'Friends' : 'Everyone'}
-                </Typography>
-                </InputWrapper>
-                <PreviewContainer>             
-                    <PreviewItem >
-                    <PreviewImage src={previews}  />
-                    </PreviewItem>             
-                {/* <PreviewImage src={previews} alt=''/> */}
-                </PreviewContainer>
-                <input
-                  
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  id="file-input"
-                  type="file"
-                  onChange={handleInputChange}
-                />
-                <label htmlFor="file-input">
-                <Button variant="contained" component="span">
-                    Upload
-                </Button>
-                </label>
-                <TextField
-                id="description"
-                label="description.."
-                variant="outlined"
-                fullWidth
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={2}
-                multiline
+<React.Fragment>
+  {loading && uploading && 'Uploading...'}
+  {data?.success && success && 'Post uploaded successfully...'}
+  <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <Dialog
+      fullScreen={fullScreen}
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="responsive-dialog-title"
+      fullWidth
+    >
+      <DialogTitle id="responsive-dialog-title">{"Post"}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+        <Box
+  sx={{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between', // Distributes items to opposite ends
+    alignItems: 'center',
+    gap: 2,
+  }}
+>
+  {/* Left-aligned text */}
+  <Typography variant="body1">Who can see?</Typography>
+  
+  {/* Right-aligned content */}
+  <Box
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 1, // Adjust spacing between switch and text
+    }}
+  >
+    <Switch
+      checked={switchValue}
+      onChange={() => setSwitchValue(!switchValue)}
+    />
+    <Typography variant="body1">
+      {switchValue ? 'Friends' : 'Everyone'}
+    </Typography>
+  </Box>
+</Box>
+
+          <PreviewContainer
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: { xs: 'center', sm: 'space-evenly' },
+              gap: { xs: 2, md: 4 },
+            }}
+          >
+            <PreviewItem>
+              <PreviewImage src={previews} />
+            </PreviewItem>
+          </PreviewContainer>
+          <Box
+            sx={{
+              mt: 2,
+              textAlign: { xs: 'center', md: 'left' },
+            }}
+          >
+            <input
+              accept="image/*"
+              style={{ display: 'none' }}
+              id="file-input"
+              type="file"
+              onChange={handleInputChange}
+            />
+            <label htmlFor="file-input">
+              <Button
+                variant="contained"
+                component="span"
                 sx={{
-                    mt: 1,
+                  width: { xs: '100%', sm: 'auto' },
                 }}
-                />
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                    label="Memory date"
-                    value={date}
-                    onChange={(newValue) => {
-                      if (newValue !== null) {
-                        const formattedDate = dayjs(newValue).format("YYYY/MM/DD");
-                        setDate(formattedDate);
-                      }
-                    }}
-                    views={['year', 'month', 'day']}
-                    inputFormat="YYYY/MM/DD"
-                    slotProps={{
-                    textField: {
-                        size: 'small',
-                    },
-                    }}
-                    sx={{
-                    mt: 1,
-                    }}
-                />
-                </LocalizationProvider>
-            </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-            <Button onClick={handleClose} autoFocus>
-                cancel
-            </Button>
-            <Button autoFocus onClick={handleSubmit}>
-                Create
-            </Button>
-            </DialogActions>
-        </Dialog>
-        </form>
-    </React.Fragment>
+              >
+                Upload
+              </Button>
+            </label>
+          </Box>
+          <TextField
+            id="description"
+            label="Description"
+            variant="outlined"
+            fullWidth
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={2}
+            multiline
+            sx={{
+              mt: 2,
+              width: { xs: '100%', md: '75%' },
+              mx: 'auto',
+            }}
+          />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Memory date"
+              value={date}
+              onChange={(newValue) => {
+                if (newValue !== null) {
+                  const formattedDate = dayjs(newValue).format("YYYY/MM/DD");
+                  setDate(formattedDate);
+                }
+              }}
+              views={['year', 'month', 'day']}
+              inputFormat="YYYY/MM/DD"
+              slotProps={{
+                textField: {
+                  size: 'small',
+                },
+              }}
+              sx={{
+                mt: 2,
+                width: { xs: '100%', md: '50%' },
+                mx: 'auto',
+              }}
+            />
+          </LocalizationProvider>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions
+        sx={{
+          flexDirection: { xs: 'row' },
+          gap: 2,
+          justifyContent: { xs: 'center', sm: 'space-between' },
+        }}
+      >
+        <Button onClick={handleClose} autoFocus>
+          Cancel
+        </Button>
+        <Button autoFocus onClick={handleSubmit}>
+          Create
+        </Button>
+      </DialogActions>
+    </Dialog>
+  </form>
+</React.Fragment>
+
   );
 }
