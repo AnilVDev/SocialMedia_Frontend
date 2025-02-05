@@ -157,7 +157,7 @@ export default function Navbar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user,userInfo } = useSelector((state) => state.auth);
-  const urlPath = userInfo?.profile_picture.split("/media/")[1];
+  // const urlPath = userInfo?.profile_picture.split("/media/")[1];
  
   const axiosInstance = useAxios(user?.access);
 
@@ -221,7 +221,7 @@ export default function Navbar() {
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
         <Avatar
           alt=""
-          src={`${api}${urlPath}`}
+          // src={`${api}${urlPath}`}
           onClick={() => navigate('/profile')}
           sx={{ cursor: 'pointer' }}
         />
